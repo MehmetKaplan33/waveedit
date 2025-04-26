@@ -1,34 +1,41 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
+      },
       colors: {
-        p1: "#2EF2FF",
-        p2: "#3C52D9",
-        p3: "#C8EA80",
-        p4: "#EAEDFF",
-        p5: "#C4CBF5",
-        s1: "#080D27",
-        s2: "#0C1838",
-        s3: "#334679",
-        s4: "#1959AD",
-        s5: "#263466",
-        black: {
-          DEFAULT: "#000000",
-          100: "#05091D",
+        p1: "#3B82F6",
+        p2: "#1D4ED8",
+        p3: "#60A5FA",
+        p4: "#93C5FD",
+        p5: "#0F172A",
+        s1: "#FFFFFF",
+        s2: "#F8FAFC",
+        s3: "#F1F5F9",
+        s4: "#E2E8F0",
+        s5: "#CBD5E1",
+        light: {
+          DEFAULT: "#FFFFFF",
+          100: "#F8FAFC",
+        },
+        dark: {
+          DEFAULT: "#0F172A",
+          100: "#1E293B",
         },
       },
       boxShadow: {
-        100: "0px 4px 4px rgba(0, 0, 0, 0.25), 0px 16px 24px rgba(0, 0, 0, 0.25), inset 0px 3px 6px #1959AD",
-        200: "0px 4px 4px rgba(0, 0, 0, 0.25), 0px 16px 24px rgba(0, 0, 0, 0.25), inset 0px 4px 10px #3391FF",
-        300: "0px 4px 4px rgba(0, 0, 0, 0.25), 0px 16px 24px rgba(0, 0, 0, 0.25), inset 0px 3px 6px #1959AD",
-        400: "inset 0px 2px 4px 0 rgba(255, 255, 255, 0.05)",
-        500: "0px 16px 24px rgba(0, 0, 0, 0.25), 0px -14px 48px rgba(40, 51, 111, 0.7)",
-      },
-      fontFamily: {
-        inter: ["Inter", "sans-serif"],
-        poppins: ["Poppins", "sans-serif"],
+        100: "0px 4px 8px rgba(148, 163, 184, 0.1), 0px 2px 4px rgba(148, 163, 184, 0.1), inset 0px 3px 6px rgba(59, 130, 246, 0.1)",
+        200: "0px 4px 8px rgba(148, 163, 184, 0.15), 0px 2px 4px rgba(148, 163, 184, 0.1), inset 0px 4px 10px rgba(59, 130, 246, 0.1)",
+        300: "0px 4px 8px rgba(148, 163, 184, 0.1), 0px 2px 4px rgba(148, 163, 184, 0.1), inset 0px 3px 6px rgba(59, 130, 246, 0.1)",
+        400: "inset 0px 2px 4px 0 rgba(0, 0, 0, 0.03)",
+        500: "0px 8px 16px rgba(148, 163, 184, 0.08), 0px 4px 8px rgba(148, 163, 184, 0.05)",
       },
       transitionProperty: {
         borderColor: "border-color",
@@ -71,6 +78,9 @@ export default {
         40: "40px",
         half: "50%",
         "7xl": "40px",
+        "4xl": "2rem",
+        "5xl": "2.5rem",
+        "6xl": "3rem",
       },
       flex: {
         50: "0 0 50%",
@@ -81,6 +91,34 @@ export default {
         256: "0 0 256px",
         100: "0 0 100%",
       },
+      width: {
+        18: "4.5rem",
+        112: "28rem",
+        128: "32rem",
+        144: "36rem",
+        160: "40rem",
+        176: "44rem",
+      },
+      height: {
+        18: "4.5rem",
+      },
+      margin: {
+        18: "4.5rem",
+      },
+      maxWidth: {
+        320: "320px",
+        340: "340px",
+        360: "360px",
+        380: "380px",
+        388: "388px",
+        400: "400px",
+        420: "420px",
+        440: "440px",
+        460: "460px",
+        480: "480px",
+        512: "512px",
+        768: "768px",
+      }
     },
   },
   plugins: [],

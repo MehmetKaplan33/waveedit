@@ -1,162 +1,194 @@
-import clsx from "clsx";
-import React, { useState } from "react";
-import { Element } from "react-scroll";
-import CountUp from "react-countup";
-import { plans } from "../constants/index.jsx";
-import Button from "../components/Button.jsx";
+import { motion } from "framer-motion";
+import Badge from "../components/Badge";
+import Button from "../components/Button";
 
-const Pricing = () => {
-  const [monthly, setMonthly] = useState(false);
+function Pricing() {
+  const plans = [
+    {
+      name: "Free",
+      price: "0",
+      description: "For basic editing needs",
+      features: [
+        "720p video resolution",
+        "5 projects per month",
+        "5 minutes maximum video length",
+        "Basic templates",
+        "Standard export",
+      ],
+      cta: "Start Free",
+      highlighted: false,
+    },
+    {
+      name: "Premium",
+      price: "19.99",
+      description: "Perfect for content creators",
+      features: [
+        "4K video resolution",
+        "Unlimited projects",
+        "30 minutes maximum video length",
+        "Premium templates",
+        "Priority processing",
+        "Advanced audio editing",
+        "Cloud storage (100GB)",
+      ],
+      cta: "Upgrade to Premium",
+      highlighted: true,
+    },
+    {
+      name: "Team",
+      price: "49.99",
+      description: "For teams and businesses",
+      features: [
+        "8K video resolution",
+        "Unlimited projects",
+        "Unlimited video length",
+        "Custom template creation",
+        "Priority processing",
+        "Advanced audio editing",
+        "Cloud storage (1TB)",
+        "Multi-user access",
+        "Brand customization",
+      ],
+      cta: "Get for Your Team",
+      highlighted: false,
+    },
+  ];
+
+  const planVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: (custom) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: custom * 0.2,
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    }),
+  };
+
   return (
-    <section>
-      <Element name="pricing">
-        <div className="container">
-          <div className="max-w-900 pricing-head_before relative mx-auto border-l border-r border-s2 bg-s1/50 pb-40 pt-28 max-xl:max-w-4xl max-lg:border-none max-md:pb-32 max-md:pt-16">
-            <h3 className="h3 max-lg:h4 max-md:h5 z-3 relative mx-auto mb-14 max-w-lg text-center text-p4 max-md:mb-11 max-sm:max-w-sm">
-              Flexible pricing for teams of all sizes
-            </h3>
-
-            <div className="relative z-4 mx-auto flex w-[375px] rounded-3xl border-[3px] border-s4/25 bg-s1/50 p-4 bacground-blur-[6px] max-md:w-[310px]">
-              <button
-                onClick={() => setMonthly(true)}
-                className={clsx("pricing-head_btn", monthly && "text-p4")}
-              >
-                Monthly
-              </button>
-              <button
-                onClick={() => setMonthly(false)}
-                className={clsx("pricing-head_btn", !monthly && "text-p4")}
-              >
-                Annual
-              </button>
-              <div
-                className={clsx(
-                  "g4 rounded-14 before:h-100 pricing-head_btn_before absolute left-2 top-2 h-[calc(100%-16px)] w-[calc(50%-8px)] overflow-hidden shadow-400 transition-transform duration-500",
-                  !monthly && "translate-x-full"
-                )}
-              />
-            </div>
-            <div className="pricing-bg">
-              <img
-                src="/images/bg-outlines.svg"
-                width={960}
-                height={380}
-                alt="outline"
-                className="relative z-2"
-              />
-              <img
-                src="/images/bg-outlines-fill.png"
-                width={960}
-                height={380}
-                alt="outline"
-                className="absolute inset-0 opacity-5 mix-blend-soft-light"
-              />
-            </div>
-          </div>
-          {/* pricing section */}
-          <div className="scroll-hide relative z-2 -mt-12 flex items-start max-xl:gap-5 max-xl:overflow-auto max-xl:pt-6">
-            {plans.map((plan, index) => (
-              <div
-                key={plan.id}
-                className="pricing-plan_first pricing-plan_last pricing-plan_odd pricing-plan_even relative border-2 p-7 max-xl:min-w-80 max-lg:rounded-3xl xl:w-[calc(33.33%+2px)]"
-              >
-                {index === 1 && (
-                  <div className="g4 absolute h-330 left-0 right-0 top-0 z-1 rounded-tl-3xl rounded-tr-3xl" />
-                )}
-                <div
-                  className={clsx(
-                    "absolute left-0 right-0 z-2 flex items-center justify-center",
-                    index === 1 ? "-top-6" : "-top-6 xl:-top-11"
-                  )}
-                >
-                  <img
-                    src={plan.logo}
-                    alt={plan.title}
-                    className={clsx(
-                      "object-contain drop-shadow-2xl",
-                      index === 1 ? "size-[120px]" : "size-[88px]"
-                    )}
-                  />
-                </div>
-
-                <div
-                  className={clsx(
-                    "relative flex flex-col items-center",
-                    index === 1 ? "pt-24" : "pt-12"
-                  )}
-                >
-                  <div
-                    className={clsx(
-                      "small-2 rounded-20 relative z-2 mx-auto mb-6 border-2 px-4 py-1.5 uppercase",
-                      index === 1 ? "border-p3 text-p3" : "border-p1 text-p1"
-                    )}
-                  >
-                    {plan.title}
-                  </div>
-
-                  <div className="relative z-2 flex items-center justify-center">
-                    <div
-                      className={clsx(
-                        "h-num flex items-start",
-                        index === 1 ? "text-p3" : "text-p4"
-                      )}
-                    >
-                      ${" "}
-                      <CountUp
-                        start={plan.priceMonthly}
-                        end={monthly ? plan.priceMonthly : plan.priceYearly}
-                        duration={0.4}
-                        useEasing={false}
-                        preserveValue
-                      />
-                    </div>
-                    <div className="small-1 relative top-3 ml-1 uppercase">
-                      / mo
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  className={clsx(
-                    "body-1 relative z-2 mb-10 w-full border-b-s2 pb-9 text-center text-p4",
-                    index === 1 && "border-b",
-                  )}
-                >
-                  {plan.caption}
-                </div>
-
-                <ul className="mx-auto space-y-4 xl:px-7">
-                  {plan.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="relative flex items-center gap-5"
-                    >
-                      <img
-                        src={"/images/check.png"}
-                        alt="check"
-                        className="size-10 object-contain"
-                      />
-                      <p className="flex-1">{feature}</p>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-10 flex w-full justify-center">
-                  <Button icon={plan.icon}>Get Started</Button>
-                </div>
-
-                {index === 1 && (
-                  <p className="small-compact mt-9 text-center text-p3 before:mx-2.5 before:content-['-'] after:mx-2.5 after:content-['-']">
-                    Limited time offer
-                  </p>
-                )}  
-              </div>
-            ))}
-          </div>
+    <section id="pricing" className="py-24 bg-gradient-to-b from-white to-blue-50 relative">
+      {/* Decorative patterns */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzQjgyRjYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0aDR2MWgtNHYtMXptMC0yaDF2LTJoLTF2MnptMCA1aDFWMzZoLTF2MXptMi0yaDF2LTJoLTF2MnptMiAyaDF2LTJoLTF2MnptLTUgMmgxdi0yaC0xdjJ6bTUtM2gxdi0yaC0xdjJ6TTM0IDI5aDFWMjdoLTF2MnptLTIgMmgxVjI5aC0xdjJ6bS0zIDBoMVYyOWgtMXYyem0wIDNoMXYtMmgtMXYyem0wIDNoMXYtMmgtMXYyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-16">
+          <Badge className="bg-blue-50 text-blue-700 ring-blue-200">PRICING</Badge>
+          <h2 className="text-5xl font-medium mt-4 mb-6 text-gray-800">
+            Plans for Every Budget
+          </h2>
+          <p className="max-w-2xl mx-auto text-xl text-gray-600">
+            Experience AI video editing with pricing that fits every need and budget.
+          </p>
         </div>
-      </Element>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {plans.map((plan, index) => (
+            <motion.div
+              key={plan.name}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={planVariants}
+              className={`rounded-2xl p-8 flex flex-col h-full border shadow transition-all duration-300 ${
+                plan.highlighted
+                  ? "bg-white shadow-lg border-blue-200 transform hover:-translate-y-1"
+                  : "bg-white/70 backdrop-blur-sm border-gray-100 hover:border-gray-200"
+              }`}
+            >
+              <div className="mb-8">
+                <h3 className="text-2xl font-medium mb-2 text-gray-800">
+                  {plan.name}
+                </h3>
+                <div className="flex items-end mb-2">
+                  <span className={`text-5xl font-bold ${plan.highlighted ? "text-blue-600" : "text-gray-700"}`}>
+                    {plan.price}
+                  </span>
+                  <span className="text-lg text-gray-500 mb-1 ml-1">
+                    {plan.price === "0" ? "" : "₺/ay"}
+                  </span>
+                </div>
+                <p className="text-gray-500">{plan.description}</p>
+              </div>
+
+              <ul className="mb-8 flex-grow space-y-4">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex items-start">
+                    <svg
+                      className={`w-5 h-5 mr-2 mt-0.5 flex-shrink-0 ${
+                        plan.highlighted ? "text-blue-500" : "text-blue-400"
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      ></path>
+                    </svg>
+                    <span className="text-gray-600">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <Button
+                className={plan.highlighted ? "w-full" : "w-full"}
+                primary={plan.highlighted}
+                secondary={!plan.highlighted}
+              >
+                {plan.cta}
+                <svg
+                  className="ml-2 inline-block"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </Button>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <p className="text-gray-600 max-w-3xl mx-auto mb-8">
+            Have larger enterprise needs? Contact us for custom solutions and pricing.
+          </p>
+          <Button
+            className="mt-4" 
+            outline
+            containerClassName="w-auto"
+          >
+            Contact Us
+            <svg
+              className="ml-2 inline-block"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V8L12 13L20 8V18ZM12 11L4 6H20L12 11Z"
+                fill="currentColor"
+              />
+            </svg>
+          </Button>
+        </div>
+      </div>
     </section>
   );
-};
+}
 
 export default Pricing;

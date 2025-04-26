@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Marker } from "./Marker.jsx";
+import React from "react";
 
 const Button = ({
   icon,
@@ -7,51 +7,66 @@ const Button = ({
   href,
   containerClassName,
   onClick,
-  markerFill,
+  primary = true,
+  secondary = false,
+  outline = false,
 }) => {
-  const Inner = () => (
-    <>
-      <span className="relative flex items-center min-h-[60px] px-4 g4 rounded-2xl inner-before group-hover:before:opacity-100 overflow-hidden">
-        <span className="absolute -left-[1px]">
-          <Marker markerFill={markerFill} />
-        </span>
-
+  // Daha modern ve şık bir buton iç içeriği
+  const Inner = () => {
+    const baseStyle = "relative flex items-center justify-center py-3 px-6 rounded-lg font-medium transition-all duration-300 ease-in-out";
+    
+    let buttonStyle = baseStyle;
+    
+    if (primary) {
+      buttonStyle += " bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:shadow-lg hover:shadow-blue-500/20 hover:-translate-y-1";
+    } else if (secondary) {
+      buttonStyle += " bg-gradient-to-r from-gray-800 to-gray-700 text-white hover:shadow-lg hover:shadow-gray-600/20 hover:-translate-y-1";
+    } else if (outline) {
+      buttonStyle += " bg-transparent border border-blue-400 text-blue-600 hover:bg-blue-50 hover:border-blue-600";
+    }
+    
+    return (
+      <span className={buttonStyle}>
         {icon && (
-          <img
-            src={icon}
-            alt="circle"
-            className="size-10 mr-5 object-contain z-10"
-          />
+          typeof icon === 'string' && icon.startsWith('/') ? (
+            <img
+              src={icon}
+              alt="icon"
+              className="w-5 h-5 mr-2 object-contain"
+            />
+          ) : (
+            <div
+              className="w-5 h-5 mr-2 flex items-center justify-center"
+              dangerouslySetInnerHTML={{ __html: icon }}
+            />
+          )
         )}
-
-        <span className="relative z-2 font-poppins base-bold text-p1 uppercase">
-          {children}
+        <span>{children}</span>
+        
+        {/* Şık efekt için overlay eklendi */}
+        <span className="absolute inset-0 rounded-lg overflow-hidden">
+          <span className="absolute inset-0 bg-gradient-to-t from-white/5 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></span>
         </span>
       </span>
-
-      <span className="glow-before glow-after" />
-    </>
-  );
+    );
+  };
+  
+  // Bağlantı veya buton olarak dönüş
   return href ? (
     <a
-      className={clsx(
-        "relative p-0.5 g5 rounded-2xl shadow-500 group",
-        containerClassName,
-      )}
+      className={clsx("inline-block", containerClassName)}
       href={href}
     >
       <Inner />
     </a>
   ) : (
     <button
-      className={clsx(
-        "relative p-0.5 g5 rounded-2xl shadow-500 group",
-        containerClassName,
-      )}
+      className={clsx("inline-block", containerClassName)}
       onClick={onClick}
     >
       <Inner />
     </button>
   );
 };
+
 export default Button;

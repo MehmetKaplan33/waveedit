@@ -27,7 +27,11 @@ const Header = () => {
       offset={-100}
       activeClass="nav-active"
     >
-      {title}
+      {title === "features" && "Features"}
+      {title === "pricing" && "Pricing"}
+      {title === "faq" && "FAQ"}
+      {title === "download" && "Download"}
+      {title === "about" && "About"}
     </LinkScroll>
   );
 
@@ -40,7 +44,7 @@ const Header = () => {
     >
       <div className="container flex h-14 items-center max-lg:px-5">
         <a className="lg:hidden flex-1 cursor-pointer z-2">
-          <img src="/images/xora.svg" width={115} height={55} alt="logo" />
+          <div className="text-p1 font-bold text-xl">WaveEdit</div>
         </a>
 
         <div
@@ -57,9 +61,9 @@ const Header = () => {
             <nav className="max-lg:relative max-lg:z-2 max-lg:my-auto">
               <ul className="flex max-lg:block max-lg:px-12">
                 <li className="nav-li">
-                  <NavLink title="features" />
+                  <NavLink title="about" />
                   <div className="dot" />
-                  <NavLink title="pricing" />
+                  <NavLink title="features" />
                 </li>
 
                 <li className="nav-logo">
@@ -73,17 +77,12 @@ const Header = () => {
                       "max-lg:hidden transition-transform duration-500 cursor-pointer")
                     }
                   >
-                    <img
-                      src="/images/xora.svg"
-                      width={160}
-                      height={55}
-                      alt="logo"
-                    />
+                    <div className="text-p1 font-bold text-2xl">WaveEdit</div>
                   </LinkScroll>
                 </li>
 
                 <li className="nav-li">
-                  <NavLink title="faq" />
+                  <NavLink title="pricing" />
                   <div className="dot" />
                   <NavLink title="download" />
                 </li>

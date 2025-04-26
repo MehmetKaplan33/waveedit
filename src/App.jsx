@@ -7,16 +7,18 @@ import Faq from './sectionas/Faq'
 import Testimonials from './sectionas/Testimonials'
 import Download from './sectionas/Download'
 import Footer from './sectionas/Footer'
+import About from './sectionas/About'
 
 const App = () => {
   return (
     <main className="overflow-hidden">
       <Header />
       <Hero />
+      <About />
       <Features />
+      <Testimonials />
       <Pricing />
       <Faq />
-      <Testimonials />
       <Download />
       <Footer />
     </main>

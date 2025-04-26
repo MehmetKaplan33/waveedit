@@ -1,18 +1,34 @@
-export const Marker = ({ fill }) => {
-      return (
-        <svg
-          width="8"
-          height="22"
-          viewBox="0 0 8 22"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+import React from "react";
+
+export const Marker = ({ markerFill }) => {
+  return (
+    <svg
+      width="12"
+      height="24"
+      viewBox="0 0 12 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="12"
+        cy="12"
+        r="11.5"
+        fill={markerFill || "#3B82F6"}
+        stroke="url(#paint0_linear_4_51)"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear_4_51"
+          x1="12"
+          y1="0"
+          x2="12"
+          y2="24"
+          gradientUnits="userSpaceOnUse"
         >
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M2.5 0H0.5V4V18V22H2.5V16.25L7.63991 11.7526C8.09524 11.3542 8.09524 10.6458 7.63991 10.2474L2.5 5.75V0Z"
-            fill={fill || "#2EF2FF"}
-          />
-        </svg>
-      );
-    };
+          <stop offset="0.0885417" stopColor="#3B82F6" />
+          <stop offset="0.854167" stopColor="#2563EB" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+};
