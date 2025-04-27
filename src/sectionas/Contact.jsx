@@ -48,7 +48,7 @@ function Contact() {
   const contactItems = [
     {
       title: "E-posta",
-      value: "iletisim@xora.com",
+      value: "iletisim@WaveEdit.com",
       icon: (
         <svg
           width="24"

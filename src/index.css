@@ -99,28 +99,28 @@
 
   /* END of Typography */
   /* START of Gradients */
+  .shared-blue-gradient {
+    background: linear-gradient(#3B82F6, #2563EB);
+  }
+
+  .shared-blue-white-gradient {
+    background: linear-gradient(#3B82F6, #F8FAFC);
+  }
+
   .g1 {
     background: linear-gradient(rgba(219, 234, 254, 0.5), transparent);
   }
 
-  .g2 {
-    background: linear-gradient(#3B82F6, #2563EB);
+  .g2, .g5 {
+    @apply shared-blue-gradient;
   }
 
-  .g3 {
-    background: linear-gradient(#3B82F6, #F8FAFC);
+  .g3, .g6 {
+    @apply shared-blue-white-gradient;
   }
 
   .g4 {
     background: linear-gradient(#FFFFFF, #F8FAFC);
-  }
-
-  .g5 {
-    background: linear-gradient(#3B82F6, #2563EB);
-  }
-
-  .g6 {
-    background: linear-gradient(#3B82F6, #F8FAFC);
   }
 
   .g7 {
@@ -134,7 +134,6 @@
   .g9 {
     background: linear-gradient(#FFFFFF, transparent);
   }
-
   /* END of Gradients */
   /* START of Common */
   .container {
@@ -142,7 +141,7 @@
   }
 
   .caption {
-    @apply small-2 mb-5 uppercase text-p3;
+    @apply small-2  uppercase text-p3;
   }
 
   .scroll-hide::-webkit-scrollbar {
@@ -291,21 +290,34 @@
     @apply before:absolute before:inset-1.5 before:rounded-half before:bg-s2 before:content-[''] hover:border-s4;
   }
 
-  .download_tech-link:hover .download_tech-icon svg path {
-    @apply fill-p1;
+  .download_link {
+    @apply relative inline-flex items-center justify-center overflow-hidden rounded-lg py-3 px-6 text-white transition-all duration-300;
+    background: linear-gradient(90deg, #3B82F6, #9333EA);
   }
 
-  .download_preview-before {
-    @apply before:g8 before:absolute before:-top-0.5 before:right-6 before:h-0.5 before:w-[63.2%] before:opacity-40 before:content-[''];
+  .download_link::before {
+    @apply content-[''] absolute inset-0 bg-gradient-to-r from-p2 to-p1 opacity-0 transition-opacity duration-300;
   }
 
-  .download_preview-after {
-    @apply after:g8 after:absolute after:-bottom-0.5 after:left-6 after:h-0.5 after:w-[42.2%] after:opacity-40 after:content-[''];
+  .download_link:hover::before {
+    @apply opacity-100;
   }
 
-  .download_preview-dot {
-    @apply absolute top-6 size-2.5 rounded-half;
-  }
+  .platform-icon-container {
+  @apply relative flex items-center justify-center size-12 rounded-xl cursor-pointer
+         transition-all duration-300 hover:shadow-lg hover:shadow-p1/20
+         before:absolute before:inset-0 before:rounded-xl before:border before:border-p1/10
+         hover:before:border-p1/30 hover:-translate-y-0.5;
+}
+
+.platform-icon-container::after {
+  @apply content-[''] absolute -inset-0.5 rounded-xl bg-gradient-to-r from-p1 to-p2
+         opacity-0 blur transition-all duration-300;
+}
+
+.platform-icon-container:hover::after {
+  @apply opacity-10;
+}
 
   /*  END of Download*/
   /*  START of Footer */

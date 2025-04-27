@@ -1,122 +1,136 @@
 import { motion } from "framer-motion";
-import { useRef } from "react";
 import Button from "../components/Button";
+import { fadeInUp, scaleIn } from "../constants/animations";
 
 function Hero() {
-  const videoRef = useRef(null);
-
-  const text = {
-    offscreen: { y: 100, opacity: 0 },
-    onscreen: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        bounce: 0.4,
-        duration: 1,
-      },
-    },
-  };
-
   return (
-    <section className="relative h-fit w-full sm:h-[80vh] flex justify-center items-center pt-14 pb-28">
-      <div className="absolute top-0 -z-10 h-full w-full bg-light-pattern" />
+    <section className="relative min-h-[90vh] md:min-h-screen w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-50 to-white">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] rounded-full bg-blue-100 blur-3xl opacity-30" />
+        <div className="absolute -bottom-1/2 -left-1/4 w-[600px] h-[600px] rounded-full bg-blue-200 blur-3xl opacity-20" />
+        <div className="absolute top-1/4 left-1/3 w-[200px] h-[200px] rounded-full bg-blue-300 blur-2xl opacity-10" />
+      </div>
 
-      <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-8 md:gap-16">
-        <motion.div
-          className="flex flex-1 flex-col gap-6 text-center lg:text-left"
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <motion.h1
-            className="text-6xl lg:text-7xl font-medium leading-tight tracking-tight text-p1"
-            variants={text}
-          >
-            XORA: AI Video Editing
-          </motion.h1>
-          <motion.p className="text-xl font-light text-gray-700" variants={text}>
-            Professional video editing is now accessible to everyone.
-            Create stunning videos in seconds with our AI-powered tools.
-          </motion.p>
+      <div className="container mx-auto px-4 relative z-10 pt-28 md:pt-32">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* Text Content */}
           <motion.div
-            className="flex flex-col gap-4 sm:flex-row sm:gap-5 justify-center lg:justify-start"
-            variants={text}
+            className="text-center lg:text-left order-2 lg:order-1"
+            initial="hidden"
+            animate="visible"
           >
-            <Button
-              href="#"
-              containerClassName="w-auto"
-              primary
-              icon={`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z" fill="currentColor"/>
-              </svg>`}
+            <motion.div variants={fadeInUp}>
+              <span className="inline-block px-4 py-2 rounded-full bg-blue-100 text-blue-600 text-sm font-semibold mb-4 md:mb-6">
+                AI-Powered Video Editing
+              </span>
+            </motion.div>
+            
+            <motion.h1 
+              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400 mb-4 md:mb-6 leading-tight"
+              variants={fadeInUp}
             >
-              TRY NOW
-            </Button>
-            <Button
-              href="#about"
-              containerClassName="w-auto"
-              outline
-              icon={`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 10L12 15L17 10H7Z" fill="currentColor"/>
-              </svg>`}
+              Create stunning videos in seconds
+            </motion.h1>
+            
+            <motion.p 
+              className="text-lg sm:text-xl text-gray-600 mb-6 md:mb-8 max-w-lg mx-auto lg:mx-0"
+              variants={fadeInUp}
+              custom={0.2}
             >
-              LEARN MORE
-            </Button>
-          </motion.div>
-        </motion.div>
+              Transform your raw footage into professional masterpieces with our AI-powered editing tools. No experience needed.
+            </motion.p>
+            
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8 md:mb-12"
+              variants={fadeInUp}
+              custom={0.4}
+            >
+              <Button
+                href="#"
+                containerClassName="w-full sm:w-auto"
+                primary
+              >
+                Start Editing Free
+                <svg className="ml-2 inline-block" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z" fill="currentColor"/>
+                </svg>
+              </Button>
+              <Button
+                href="#"
+                containerClassName="w-full sm:w-auto"
+                secondary
+              >
+                Watch Demo
+                <svg className="ml-2 inline-block" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z" fill="currentColor"/>
+                </svg>
+              </Button>
+            </motion.div>
 
-        <motion.div
-          className="flex flex-1 justify-center items-center"
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: 0.8,
-            delay: 0.5,
-            ease: [0, 0.71, 0.2, 1.01],
-          }}
-        >
-          <div className="relative w-full max-w-lg rounded-xl overflow-hidden shadow-lg">
-            <svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-              {/* Main Background */}
-              <rect width="600" height="400" rx="20" fill="#F8FAFC" />
-              
-              {/* App Header */}
-              <rect y="0" width="600" height="60" rx="20" fill="#F1F5F9" />
-              <rect x="20" y="20" width="120" height="20" rx="5" fill="#3B82F6" />
-              <rect x="460" y="15" width="30" height="30" rx="15" fill="#60A5FA" />
-              <rect x="500" y="15" width="30" height="30" rx="15" fill="#60A5FA" />
-              <rect x="540" y="15" width="30" height="30" rx="15" fill="#60A5FA" />
-              
-              {/* Sidebar */}
-              <rect x="0" y="60" width="150" height="340" fill="#F1F5F9" />
-              <rect x="20" y="80" width="110" height="10" rx="5" fill="#E2E8F0" />
-              <rect x="20" y="100" width="110" height="10" rx="5" fill="#E2E8F0" />
-              <rect x="20" y="140" width="110" height="10" rx="5" fill="#60A5FA" />
-              <rect x="20" y="180" width="110" height="10" rx="5" fill="#E2E8F0" />
-              <rect x="20" y="220" width="110" height="10" rx="5" fill="#E2E8F0" />
-              <rect x="20" y="260" width="110" height="10" rx="5" fill="#E2E8F0" />
-              
-              {/* Main Content Area */}
-              <rect x="170" y="80" width="410" height="200" rx="10" fill="#E2E8F0" />
-              
-              {/* Timeline */}
-              <rect x="170" y="300" width="410" height="80" rx="10" fill="#E2E8F0" />
-              <rect x="190" y="320" width="60" height="40" rx="5" fill="#3B82F6" />
-              <rect x="270" y="320" width="80" height="40" rx="5" fill="#60A5FA" />
-              <rect x="370" y="320" width="70" height="40" rx="5" fill="#3B82F6" />
-              <rect x="460" y="320" width="100" height="40" rx="5" fill="#60A5FA" />
-              
-              {/* Video Content */}
-              <circle cx="375" cy="180" r="60" fill="#3B82F6" fillOpacity="0.2" />
-              <path d="M350 150L350 210L410 180L350 150Z" fill="#3B82F6" />
-              
-              {/* Timeline Marker */}
-              <rect x="270" y="290" width="4" height="100" fill="#3B82F6" />
-              <circle cx="272" cy="290" r="8" fill="#3B82F6" />
-            </svg>
-          </div>
-        </motion.div>
+            {/* Features Pills */}
+            <motion.div 
+              className="flex flex-wrap gap-3 justify-center lg:justify-start"
+              variants={fadeInUp}
+              custom={0.6}
+            >
+              {['4K Support', 'Auto Color Correction', 'Smart Transitions', 'Cloud Storage'].map((feature) => (
+                <span 
+                  key={feature} 
+                  className="px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full text-sm text-gray-600 border border-gray-100 shadow-sm hover:bg-white hover:shadow-md transition-all duration-300"
+                >
+                  {feature}
+                </span>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          {/* Interface Preview */}
+          <motion.div
+            className="relative order-1 lg:order-2 -mx-4 sm:mx-0"
+            variants={scaleIn}
+            initial="hidden"
+            animate="visible"
+            custom={0.3}
+          >
+            <div className="relative z-10 bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-gray-100 overflow-hidden max-w-2xl mx-auto">
+              <div className="h-10 sm:h-12 bg-gray-50 border-b border-gray-100 flex items-center px-4 gap-2">
+                <div className="flex gap-2">
+                  <div className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-red-400" />
+                  <div className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-yellow-400" />
+                  <div className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-green-400" />
+                </div>
+              </div>
+              <div className="aspect-video bg-gray-900 relative">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-14 sm:w-16 h-14 sm:h-16 rounded-full bg-blue-500/20 flex items-center justify-center transform hover:scale-110 transition-transform duration-300 cursor-pointer">
+                    <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-blue-500/40 flex items-center justify-center">
+                      <div className="w-7 sm:w-8 h-7 sm:h-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                          <path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z" fill="currentColor"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-gray-900/60 to-transparent" />
+              </div>
+              <div className="p-3 sm:p-4 bg-white border-t border-gray-100">
+                <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                  <div className="w-16 sm:w-20 h-10 sm:h-12 rounded bg-blue-500 flex-shrink-0" />
+                  <div className="w-16 sm:w-20 h-10 sm:h-12 rounded bg-blue-400 flex-shrink-0" />
+                  <div className="w-16 sm:w-20 h-10 sm:h-12 rounded bg-blue-300 flex-shrink-0" />
+                  <div className="w-16 sm:w-20 h-10 sm:h-12 rounded bg-gray-100 flex-shrink-0" />
+                </div>
+              </div>
+            </div>
+
+            {/* Decorative Elements */}
+            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-r from-blue-50 to-indigo-50 rounded-full blur-3xl opacity-50" />
+            <div className="absolute -right-8 top-1/3 w-20 sm:w-24 h-20 sm:h-24 bg-blue-200 rounded-full blur-2xl opacity-40" />
+            <div className="absolute -left-4 bottom-1/4 w-16 sm:w-20 h-16 sm:h-20 bg-blue-300 rounded-full blur-2xl opacity-30" />
+          </motion.div>
+        </div>
       </div>
     </section>
   );
